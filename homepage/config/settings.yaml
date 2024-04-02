@@ -1,0 +1,34 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/settings
+
+title: My Media Center
+hideVersion: true
+headerStyle: boxed
+searchProvider: duckduckgo
+useEqualHeights: false
+disableCollapse: true
+statusStyle: "dot"
+
+background: 
+  image: /images/background.jpg
+  blur: "" # sm, "", md, xl... see https://tailwindcss.com/docs/backdrop-blur
+  saturate: 115 # 0, 50, 100... see https://tailwindcss.com/docs/backdrop-saturate
+  #brightness: 50 # 0, 50, 75... see https://tailwindcss.com/docs/backdrop-brightness
+  opacity: 45 # 0-100
+
+layout:
+  Media:
+    style: row
+    columns: 2
+    icon: mdi-motion-play-#ba55d3
+  Torrent:
+    icon: mdi-share-variant-#3cb371
+  #Utilities:
+    #icon: mdi-toolbox-#ff5a36
+  Network:
+    icon: mdi-server-network-#00aae4
+
+#providers:
+#  openweathermap: openweathermapapikey
+#  weatherapi: weatherapiapikey

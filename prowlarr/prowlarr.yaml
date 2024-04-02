@@ -1,0 +1,32 @@
+services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TZONE}
+    depends_on:
+      - lidarr
+      - radarr
+      - sonarr
+    networks:
+      - ${MY_NET}
+    ports:
+      - ${PROWLARR_HOST_PORT}:${PROWLARR_CONTAINER_PORT}
+    volumes:
+      - .\config:/config
+      #- path\to\tvseries:/tv #optional
+      #- path\to\downloads:/downloads #optional
+    restart: unless-stopped
+    labels: 
+      - homepage.group=Torrent
+      - homepage.name=Prowlarr
+      - homepage.icon=prowlarr.png
+      - homepage.href=http://${HOST}:${PROWLARR_HOST_PORT}
+      - homepage.description=Trackers management
+      - homepage.ping=http://${HOST}:${PROWLARR_HOST_PORT}
+      - homepage.showStats=false
+      - homepage.widget.type=prowlarr
+      - homepage.widget.url=http://prowlarr:${PROWLARR_HOST_PORT}
+      - homepage.widget.key=${PROWLARR_API_KEY}

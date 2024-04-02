@@ -1,0 +1,32 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/service-widgets
+
+- resources:
+    label: System
+    cpu: true
+    memory: true
+    #cputemp: true
+    #uptime: true
+    #units: celsius
+    refresh: 3000
+    #diskUnits: bytes
+    expanded: true
+
+- resources:
+    label: Storage
+    disk: /
+    refresh: 3000
+    expanded: true
+
+- search:
+    provider: [google, duckduckgo]
+    target: _blank
+    focus: true
+    showSearchSuggestions: true
+
+- datetime:
+    text_size: x4
+    format:
+      dateStyle: short
+      timeStyle: short

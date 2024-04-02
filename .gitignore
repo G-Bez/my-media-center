@@ -1,0 +1,28 @@
+# Environment files
+*.env
+
+# Logs folders
+homepage/config/logs
+jellyfin/config/*
+!jellyfin/config/.gitkeep
+lidarr/config/*
+!lidarr/config/.gitkeep
+nginx-proxy-manager/data/*
+!nginx-proxy-manager/data/.gitkeep
+nginx-proxy-manager/letsencrypt/*
+!nginx-proxy-manager/letsencrypt/.gitkeep
+prowlarr/config/*
+!prowlarr/config/.gitkeep
+qbittorrent/config/*
+!qbittorrent/config/readme.txt
+radarr/config/*
+!radarr/config/.gitkeep
+sonarr/config/*
+!sonarr/config/.gitkeep
+speedtest-tracker/config/*
+!speedtest-tracker/config/.gitkeep
+
+# Homepage background img
+homepage/img/*
+!homepage/img/readme.txt
+

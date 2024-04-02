@@ -1,0 +1,31 @@
+services:
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TZONE}
+    depends_on:
+      - jellyfin
+    networks:
+      - ${MY_NET}
+    ports:
+      - ${RADARR_HOST_PORT}:${RADARR_CONTAINER_PORT}
+    volumes:
+      - .\config:/config
+      #- path\to\tvseries:/tv #optional
+      #- path\to\downloads:/downloads #optional
+    restart: unless-stopped
+    labels: 
+      - homepage.group=Media
+      - homepage.name=Radarr
+      - homepage.icon=radarr.png
+      - homepage.href=http://${HOST}:${RADARR_HOST_PORT}
+      - homepage.description=Movie management
+      - homepage.ping=http://${HOST}:${RADARR_HOST_PORT}
+      - homepage.showStats=false
+      - homepage.widget.type=radarr
+      - homepage.widget.url=http://radarr:${RADARR_HOST_PORT}
+      - homepage.widget.key=${RADARR_API_KEY}
+      - homepage.widget.enableQueue=true

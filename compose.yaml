@@ -1,0 +1,16 @@
+include:
+  - dockerproxy/dockerproxy.yaml
+  - homepage/homepage.yaml
+  - jellyfin/jellyfin.yaml
+  - lidarr/lidarr.yaml
+  #- nginx-proxy-manager/npm.yaml
+  - prowlarr/prowlarr.yaml
+  - qbittorrent/qbittorrent.yaml
+  - radarr/radarr.yaml
+  - sonarr/sonarr.yaml
+  - speedtest-tracker/speedtest-tracker.yaml
+
+networks:
+  ${MY_NET}:
+    driver: bridge
+    attachable: true

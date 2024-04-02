@@ -1,0 +1,35 @@
+services:
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TZONE}
+      - WEBUI_PORT=${QBIT_UI_CONTAINER_PORT}
+      - TORRENTING_PORT=${QBIT_TORRENTING_CONTAINER_PORT} #46558 attualmente aperta
+    depends_on:
+      - prowlarr
+    networks:
+      - ${MY_NET}
+    ports:
+      - ${QBIT_UI_HOST_PORT}:${QBIT_UI_CONTAINER_PORT}
+      - ${QBIT_TORRENTING_HOST_PORT}:${QBIT_TORRENTING_CONTAINER_PORT}
+      - ${QBIT_TORRENTING_HOST_PORT}:${QBIT_TORRENTING_CONTAINER_PORT}/udp
+    volumes:
+      - .\config:/config
+      - .\ssl:/certs
+      - ${DOWNLOAD_DIR}:/downloads
+    restart: unless-stopped
+    labels: 
+      - homepage.group=Torrent
+      - homepage.name=qBittorrent
+      - homepage.icon=qbittorrent.png
+      - homepage.href=http://${HOST}:${QBIT_UI_HOST_PORT}
+      - homepage.description=Torrent client
+      - homepage.ping=http://${HOST}:${QBIT_UI_HOST_PORT}
+      - homepage.showStats=false
+      - homepage.widget.type=qbittorrent
+      - homepage.widget.url=http://qbittorrent:${QBIT_UI_HOST_PORT}
+      - homepage.widget.username=${QBIT_USERNAME}
+      - homepage.widget.password=${QBIT_PWD}

@@ -1,0 +1,35 @@
+services:
+  speedtest-tracker:
+    image: lscr.io/linuxserver/speedtest-tracker:latest
+    container_name: speedtest-tracker
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TZONE}
+      - DB_CONNECTION=${SPEEDTEST_DB}
+      #- APP_KEY= #optional
+      #- DB_HOST= #optional
+      #- DB_PORT= #optional
+      #- DB_DATABASE= #optional
+      #- DB_USERNAME= #optional
+      #- DB_PASSWORD= #optional
+    depends_on:
+      - dockerproxy
+    networks:
+      - ${MY_NET}
+    ports:
+      - ${SPEEDTEST_HOST_PORT}:${SPEEDTEST_CONTAINER_PORT}
+    volumes:
+      - .\config:/config
+      #- /path/to-custom-ssl-keys:/config/keys
+    restart: unless-stopped
+    labels:
+      - homepage.group=Network
+      - homepage.name=Speedtest tracker
+      - homepage.icon=si-speedtest
+      - homepage.href=http://${HOST}:${SPEEDTEST_HOST_PORT}
+      - homepage.description=Speedtest monitor
+      - homepage.ping=http://${HOST}:${SPEEDTEST_HOST_PORT}
+      - homepage.showStats=false
+      - homepage.widget.type=speedtest
+      - homepage.widget.url=http://speedtest-tracker:${SPEEDTEST_HOST_PORT}

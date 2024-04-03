@@ -16,7 +16,7 @@ services:
       - ${PROWLARR_HOST_PORT}:${PROWLARR_CONTAINER_PORT}
     volumes:
       - .\config:/config
-      #- path\to\tvseries:/tv #optional
+      - ${MEDIA_DIR}:/media
       #- path\to\downloads:/downloads #optional
     restart: unless-stopped
     labels: 

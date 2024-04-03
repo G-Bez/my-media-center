@@ -18,8 +18,7 @@ services:
       #- ${JELLYFIN_UDP_HTTPS_HOST_PORT}:${JELLYFIN_UDP_HTTPS_CONTAINER_PORT}/udp #optional
     volumes:
       - .\config:/config
-      - F:\:/media
-      #- path\to\tvseries:/tv #optional
+      - ${MEDIA_DIR}:/media
       #- path\to\downloads:/downloads #optional
     restart: unless-stopped
     labels: 

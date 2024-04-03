@@ -19,7 +19,7 @@ services:
     volumes:
       - .\config:/config
       - .\ssl:/certs
-      - ${DOWNLOAD_DIR}:/downloads
+      - ${TORRENTS_DIR}:/data/torrents/
     restart: unless-stopped
     labels: 
       - homepage.group=Torrent

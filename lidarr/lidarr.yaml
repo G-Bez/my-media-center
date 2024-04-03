@@ -14,7 +14,7 @@ services:
       - ${LIDARR_HOST_PORT}:${LIDARR_CONTAINER_PORT}
     volumes:
       - .\config:/config
-      - ${MEDIA_DIR}:/media
+      - ${DATA_DIR}:/data
       #- path\to\downloads:/downloads #optional
     restart: unless-stopped
     labels: 

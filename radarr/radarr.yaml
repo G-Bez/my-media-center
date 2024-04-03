@@ -14,8 +14,8 @@ services:
       - ${RADARR_HOST_PORT}:${RADARR_CONTAINER_PORT}
     volumes:
       - .\config:/config
-      - ${MEDIA_DIR}:/media
-      #- path\to\tvseries:/tv #optional
+      - ${DATA_DIR}:/data
+      #- path\to\movies:/movies #optional
       #- path\to\downloads:/downloads #optional
     restart: unless-stopped
     labels: 

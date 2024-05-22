@@ -21,6 +21,8 @@ sonarr/config/*
 !sonarr/config/.gitkeep
 speedtest-tracker/config/*
 !speedtest-tracker/config/.gitkeep
+tailscale/tailscale/*
+!tailscale/tailscale/.gitkeep
 
 # Homepage background img
 homepage/img/*

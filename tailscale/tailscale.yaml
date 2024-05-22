@@ -1,0 +1,30 @@
+services:
+  tailscale:
+    image: tailscale/tailscale:latest
+    container_name: tailscale
+    #hostname: tailscale-nas
+    depends_on:
+      - dockerproxy
+    #networks:
+    #  - ${MY_NET}
+    volumes:
+      - .\:/var/lib # State data will be stored in this directory
+      - /dev/net/tun:/dev/net/tun # Required for tailscale to work
+    cap_add: # Required for tailscale to work
+      - net_admin
+      - sys_module
+    command: tailscaled
+    privileged: true
+    restart: unless-stopped
+    labels: 
+      - homepage.group=Network
+      - homepage.name=Tailscale
+      - homepage.icon=tailscale-light.png
+      - homepage.href=https://it.wikipedia.org/wiki/Ges%C3%B9
+      - homepage.description=VPS
+      - homepage.ping=https://it.wikipedia.org/wiki/Ges%C3%B9
+      - homepage.showStats=false
+      - homepage.widget.type=tailscale
+      - homepage.widget.url=https://it.wikipedia.org/wiki/Ges%C3%B9
+      #- homepage.widget.deviceid=${TAILSCALE_DEVICE_ID}
+      #- homepage.widget.key=${TAILSCALE_API_KEY}

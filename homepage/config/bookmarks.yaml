@@ -2,18 +2,20 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/latest/configs/bookmarks
 
-- Developer:
+- Repository:
     - Github:
         - abbr: GH
-          href: https://github.com/
-          icon: github.png
+          href: https://github.com/G-Bez/my-media-center/
+          icon: github-light.png
 
 - Social:
     - Reddit:
         - abbr: RE
           href: https://reddit.com/
+          icon: reddit.png
 
 - Entertainment:
     - YouTube:
         - abbr: YT
           href: https://youtube.com/
+          icon: youtube.png

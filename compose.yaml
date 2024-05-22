@@ -1,5 +1,6 @@
 include:
   - dockerproxy/dockerproxy.yaml
+  #- tailscale/tailscale.yaml
   - homepage/homepage.yaml
   - jellyfin/jellyfin.yaml
   - lidarr/lidarr.yaml

@@ -12,4 +12,5 @@ services:
     volumes:
       - .\config:/config
       - .\img:/app/public/images
+      - ${DATA_DIR}:/data
     restart: unless-stopped

@@ -15,7 +15,7 @@
 
 - resources:
     label: Storage
-    disk: /
+    disk: /data
     refresh: 3000
     expanded: true
 

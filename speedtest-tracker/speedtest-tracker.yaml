@@ -16,7 +16,7 @@ services:
     depends_on:
       - dockerproxy
     networks:
-      - ${MY_NET}
+      - My_net
     ports:
       - ${SPEEDTEST_HOST_PORT}:${SPEEDTEST_CONTAINER_PORT}
     volumes:

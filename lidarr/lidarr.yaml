@@ -9,12 +9,12 @@ services:
     depends_on:
       - jellyfin
     networks:
-      - ${MY_NET}
+      - My_net
     ports:
       - ${LIDARR_HOST_PORT}:${LIDARR_CONTAINER_PORT}
     volumes:
       - .\config:/config
-      - ${DATA_DIR}:/data
+      - ${MEDIA_DIR}:/data
       #- path\to\downloads:/downloads #optional
     restart: unless-stopped
     labels: 

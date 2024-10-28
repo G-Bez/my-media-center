@@ -11,7 +11,7 @@ services:
     depends_on:
       - prowlarr
     networks:
-      - ${MY_NET}
+      - My_net
     ports:
       - ${QBIT_UI_HOST_PORT}:${QBIT_UI_CONTAINER_PORT}
       - ${QBIT_TORRENTING_HOST_PORT}:${QBIT_TORRENTING_CONTAINER_PORT}

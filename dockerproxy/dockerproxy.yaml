@@ -8,7 +8,7 @@ services:
       - TASKS=1 # Allow access to viewing tasks (necessary when using Docker Swarm)
       - POST=0 # Disallow any POST operations (effectively read-only)
     networks:
-      - ${MY_NET}
+      - My_net
     ports:
       - ${HOMEPAGE_VAR_DOCKERPROXY_HOST_PORT}:${HOMEPAGE_VAR_DOCKERPROXY_CONTAINER_PORT}
     volumes:

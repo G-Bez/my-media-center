@@ -6,12 +6,12 @@ include:
   - lidarr/lidarr.yaml
   #- nginx-proxy-manager/npm.yaml
   - prowlarr/prowlarr.yaml
-  - qbittorrent/qbittorrent.yaml
+  #- qbittorrent/qbittorrent.yaml
   - radarr/radarr.yaml
   - sonarr/sonarr.yaml
-  - speedtest-tracker/speedtest-tracker.yaml
+  #- speedtest-tracker/speedtest-tracker.yaml
 
 networks:
-  ${MY_NET}:
+  My_net:
     driver: bridge
     attachable: true

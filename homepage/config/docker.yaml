@@ -5,6 +5,4 @@
 my-docker:
   host: dockerproxy
   port: 2375
-  
-#other-docker:
-#  socket: /var/run/docker.sock
+ 

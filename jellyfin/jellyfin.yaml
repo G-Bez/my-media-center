@@ -10,7 +10,7 @@ services:
     depends_on:
       - dockerproxy
     networks:
-      - ${MY_NET}
+      - My_net
     ports:
       - ${JELLYFIN_HTTP_HOST_PORT}:${JELLYFIN_HTTP_CONTAINER_PORT}
       #- ${JELLYFIN_HTTPS_HOST_PORT}:${JELLYFIN_HTTPS_CONTAINER_PORT} #optional https port

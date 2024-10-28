@@ -6,11 +6,11 @@ services:
     depends_on:
       - dockerproxy
     networks:
-      - ${MY_NET}
+      - My_net
     ports:
       - ${HOMEPAGE_HOST_PORT}:${HOMEPAGE_CONTAINER_PORT}
     volumes:
       - .\config:/config
       - .\img:/app/public/images
-      - ${DATA_DIR}:/data
+      - ${MEDIA_DIR}:/data
     restart: unless-stopped

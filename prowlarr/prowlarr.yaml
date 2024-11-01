@@ -29,5 +29,5 @@ services:
       - homepage.href=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/prowlarr # Replace this value with http://localhost:${PROWLARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
       - homepage.ping=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/prowlarr # Replace this value with http://localhost:${PROWLARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
       - homepage.widget.type=prowlarr
-      - homepage.widget.url=https://prowlarr:${PROWLARR_HTTPS_HOST_PORT} # Replace this value with http://prowlarr:${PROWLARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
+      - homepage.widget.url=https://prowlarr:${PROWLARR_HTTPS_CONTAINER_PORT} # Replace this value with http://prowlarr:${PROWLARR_HTTP_CONTAINER_PORT} in order to test the widget before setting up SSL.
       - homepage.widget.key=${PROWLARR_API_KEY}

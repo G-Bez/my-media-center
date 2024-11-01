@@ -18,7 +18,6 @@ services:
     volumes:
       - .\config:/config
       - ..\swag\config\etc:/swag-ssl
-      - ..swag\config\keys:/swag-ssl2
       - ${MEDIA_DIR}:/data
     restart: unless-stopped
     labels: 
@@ -30,5 +29,5 @@ services:
       - homepage.href=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/lidarr # Replace this value with http://localhost:${LIDARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
       - homepage.ping=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/lidarr # Replace this value with http://localhost:${LIDARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
       - homepage.widget.type=lidarr
-      - homepage.widget.url=https://lidarr:${LIDARR_HTTPS_HOST_PORT} # Replace this value with http://lidarr:${LIDARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
+      - homepage.widget.url=https://lidarr:${LIDARR_HTTPS_CONTAINER_PORT} # Replace this value with http://lidarr:${LIDARR_HTTP_CONTAINER_PORT} in order to test the widget before setting up SSL.
       - homepage.widget.key=${LIDARR_API_KEY}

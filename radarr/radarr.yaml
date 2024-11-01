@@ -29,6 +29,6 @@ services:
       - homepage.href=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/radarr # Replace this value with http://localhost:${RADARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
       - homepage.ping=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/radarr # Replace this value with http://localhost:${RADARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
       - homepage.widget.type=radarr
-      - homepage.widget.url=https://radarr:${RADARR_HTTPS_HOST_PORT} # Replace this value with http://radarr:${RADARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
+      - homepage.widget.url=https://radarr:${RADARR_HTTPS_CONTAINER_PORT} # Replace this value with http://radarr:${RADARR_HTTP_CONTAINER_PORT} in order to test the widget before setting up SSL.
       - homepage.widget.key=${RADARR_API_KEY}
       - homepage.widget.enableQueue=true

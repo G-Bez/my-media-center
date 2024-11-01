@@ -12,7 +12,6 @@ services:
       #- UPDATE_IP=ipv4 #optional (when set uses 3rd party cloudflare service)
     depends_on: 
       - socket-proxy
-    #network_mode: host #optional
     networks:
       - Media_server_net
     volumes:

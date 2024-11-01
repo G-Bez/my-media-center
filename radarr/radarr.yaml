@@ -6,27 +6,29 @@ services:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
       - TZ=${TZONE}
+      - VIRTUAL_HOST=${DUCKDNS_SUBDOMAIN}.duckdns.org
+      #- VIRTUAL_PORT=<<port>> #optional. Tell nginx which port to proxy if the container exposes multiple ports. Remember to also edit the corresponding nginx .conf files accordingly.
     depends_on:
-      - jellyfin
+      - prowlarr
     networks:
-      - My_net
+      - Media_server_net
     ports:
-      - ${RADARR_HOST_PORT}:${RADARR_CONTAINER_PORT}
+      #- ${RADARR_HTTP_HOST_PORT}:${RADARR_HTTP_CONTAINER_PORT} # Default HTTP port. In-app manual settings required to enable SSL. You can comment out this line after setting up SSL. 
+      - ${RADARR_HTTPS_HOST_PORT}:${RADARR_HTTPS_CONTAINER_PORT} 
     volumes:
       - .\config:/config
+      - ..\swag\config\etc:/swag-ssl
       - ${MEDIA_DIR}:/data
-      #- path\to\movies:/movies #optional
-      #- path\to\downloads:/downloads #optional
     restart: unless-stopped
     labels: 
       - homepage.group=Media
       - homepage.name=Radarr
       - homepage.icon=radarr.png
-      - homepage.href=http://${HOST}:${RADARR_HOST_PORT}
       - homepage.description=Movie management
-      - homepage.ping=http://${HOST}:${RADARR_HOST_PORT}
       - homepage.showStats=false
+      - homepage.href=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/radarr # Replace this value with http://localhost:${RADARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
+      - homepage.ping=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/radarr # Replace this value with http://localhost:${RADARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
       - homepage.widget.type=radarr
-      - homepage.widget.url=http://radarr:${RADARR_HOST_PORT}
+      - homepage.widget.url=https://radarr:${RADARR_HTTPS_HOST_PORT} # Replace this value with http://radarr:${RADARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
       - homepage.widget.key=${RADARR_API_KEY}
       - homepage.widget.enableQueue=true

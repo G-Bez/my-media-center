@@ -1,17 +1,19 @@
 include:
-  - dockerproxy/dockerproxy.yaml
+  - socket-proxy/socket-proxy.yaml
+  - duckdns/duckdns.yaml
+  - swag/swag.yaml
+  #- ldap-auth/ldap-auth.yaml
   #- tailscale/tailscale.yaml
   - homepage/homepage.yaml
-  - jellyfin/jellyfin.yaml
   - lidarr/lidarr.yaml
-  #- nginx-proxy-manager/npm.yaml
   - prowlarr/prowlarr.yaml
   #- qbittorrent/qbittorrent.yaml
   - radarr/radarr.yaml
   - sonarr/sonarr.yaml
+  - jellyfin/jellyfin.yaml
   #- speedtest-tracker/speedtest-tracker.yaml
 
 networks:
-  My_net:
+  Media_server_net:
     driver: bridge
     attachable: true

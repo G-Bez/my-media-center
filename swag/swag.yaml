@@ -1,0 +1,44 @@
+services:
+  swag:
+    image: lscr.io/linuxserver/swag:latest
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - DOCKER_MODS=linuxserver/mods:swag-dashboard
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TZONE}
+      - URL=${DUCKDNS_SUBDOMAIN}.duckdns.org
+      - VALIDATION=dns
+      - SUBDOMAINS= www, #wildcard #optional
+      #- CERTPROVIDER= #optional
+      - DNSPLUGIN=duckdns #optional
+      #- PROPAGATION= #optional
+      #- EMAIL= #optional
+      - ONLY_SUBDOMAINS=false #optional
+      #- EXTRA_DOMAINS= #optional
+      - STAGING=false #optional
+    depends_on: 
+      #- ldap-auth
+      - duckdns
+    volumes:
+      - .\config:/config
+    ports:
+      - ${SWAG_HTTP_HOST_PORT}:${SWAG_HTTP_CONTAINER_PORT} #optional
+      - ${SWAG_HTTPS_HOST_PORT}:${SWAG_HTTPS_CONTAINER_PORT}
+      - ${SWAG_DASHBOARD_HOST_PORT}:${SWAG_DASHBOARD_CONTAINER_PORT}
+    networks:
+      - Media_server_net
+    restart: unless-stopped
+    labels: 
+      - homepage.group=Network
+      - homepage.name=Swag
+      - homepage.icon=lets-encrypt.png
+      - homepage.href=http://${HOST}:${SWAG_DASHBOARD_HOST_PORT}
+      - homepage.description=Reverse proxy and certbot client
+      - homepage.ping=http://${HOST}:${SWAG_DASHBOARD_HOST_PORT}
+      #- homepage.showStats=false
+      - homepage.widget.type=swagdashboard
+      - homepage.widget.url=http://swagdashboard:${SWAG_DASHBOARD_HOST_PORT}
+      #- homepage.widget.key=${SWAG_API_KEY}

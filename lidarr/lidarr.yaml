@@ -6,25 +6,29 @@ services:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
       - TZ=${TZONE}
+      - VIRTUAL_HOST=${DUCKDNS_SUBDOMAIN}.duckdns.org
+      #- VIRTUAL_PORT=<<port>> #optional. Tell nginx which port to proxy if the container exposes multiple ports. Remember to also edit the corresponding nginx .conf files accordingly.
     depends_on:
-      - jellyfin
+      - prowlarr
     networks:
-      - My_net
+      - Media_server_net
     ports:
-      - ${LIDARR_HOST_PORT}:${LIDARR_CONTAINER_PORT}
+      #- ${LIDARR_HTTP_HOST_PORT}:${LIDARR_HTTP_CONTAINER_PORT} # Default HTTP port. In-app manual settings required to enable SSL. You can comment out this line after setting up SSL. 
+      - ${LIDARR_HTTPS_HOST_PORT}:${LIDARR_HTTPS_CONTAINER_PORT}
     volumes:
       - .\config:/config
+      - ..\swag\config\etc:/swag-ssl
+      - ..swag\config\keys:/swag-ssl2
       - ${MEDIA_DIR}:/data
-      #- path\to\downloads:/downloads #optional
     restart: unless-stopped
     labels: 
       - homepage.group=Media
       - homepage.name=Lidarr
       - homepage.icon=lidarr.png
-      - homepage.href=http://${HOST}:${LIDARR_HOST_PORT}
       - homepage.description=Music management
-      - homepage.ping=http://${HOST}:${LIDARR_HOST_PORT}
       - homepage.showStats=false
+      - homepage.href=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/lidarr # Replace this value with http://localhost:${LIDARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
+      - homepage.ping=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/lidarr # Replace this value with http://localhost:${LIDARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
       - homepage.widget.type=lidarr
-      - homepage.widget.url=http://lidarr:${LIDARR_HOST_PORT}
+      - homepage.widget.url=https://lidarr:${LIDARR_HTTPS_HOST_PORT} # Replace this value with http://lidarr:${LIDARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
       - homepage.widget.key=${LIDARR_API_KEY}

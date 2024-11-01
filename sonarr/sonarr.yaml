@@ -6,26 +6,29 @@ services:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
       - TZ=${TZONE}
+      - VIRTUAL_HOST=${DUCKDNS_SUBDOMAIN}.duckdns.org
+      #- VIRTUAL_PORT=<<port>> #optional. Tell nginx which port to proxy if the container exposes multiple ports. Remember to also edit the corresponding nginx .conf files accordingly.
     depends_on:
-      - jellyfin
+      - prowlarr
     networks:
-      - My_net
+      - Media_server_net
     ports:
-      - ${SONARR_HOST_PORT}:${SONARR_CONTAINER_PORT}
+      #- ${SONARR_HTTP_HOST_PORT}:${SONARR_HTTP_CONTAINER_PORT} # Default HTTP port. In-app manual settings required to enable SSL. You can comment out this line after setting up SSL. 
+      - ${SONARR_HTTPS_HOST_PORT}:${SONARR_HTTPS_CONTAINER_PORT}
     volumes:
       - .\config:/config
+      - ..\swag\config\etc:/swag-ssl
       - ${MEDIA_DIR}:/data
-      #- path\to\downloads:/downloads #optional
     restart: unless-stopped
     labels: 
       - homepage.group=Media
       - homepage.name=Sonarr
       - homepage.icon=sonarr.png
-      - homepage.href=http://${HOST}:${SONARR_HOST_PORT}
       - homepage.description=TV series management
-      - homepage.ping=http://${HOST}:${SONARR_HOST_PORT}
       - homepage.showStats=false
+      - homepage.href=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/sonarr # Replace this value with http://localhost:${SONARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
+      - homepage.ping=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/sonarr # Replace this value with http://localhost:${SONARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
       - homepage.widget.type=sonarr
-      - homepage.widget.url=http://sonarr:${SONARR_HOST_PORT}
+      - homepage.widget.url=https://sonarr:${SONARR_HTTPS_HOST_PORT} # Replace this value with http://sonarr:${RADARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
       - homepage.widget.key=${SONARR_API_KEY}
       - homepage.widget.enableQueue=true

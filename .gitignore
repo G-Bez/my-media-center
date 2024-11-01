@@ -1,24 +1,26 @@
 # Environment files
 *.env
 
-# Logs folders
+# Config and logs folders
+duckdns/config/*
+!duckdns/config/.gitkeep
+ldap-auth/config/*
+!ldap-auth/config/.gitkeep
+swag/config/*
+!swag/config/.gitkeep
 homepage/config/logs
-jellyfin/config/*
-!jellyfin/config/.gitkeep
-lidarr/config/*
-!lidarr/config/.gitkeep
-nginx-proxy-manager/data/*
-!nginx-proxy-manager/data/.gitkeep
-nginx-proxy-manager/letsencrypt/*
-!nginx-proxy-manager/letsencrypt/.gitkeep
 prowlarr/config/*
 !prowlarr/config/.gitkeep
-qbittorrent/config/*
-!qbittorrent/config/readme.txt
+lidarr/config/*
+!lidarr/config/.gitkeep
 radarr/config/*
 !radarr/config/.gitkeep
 sonarr/config/*
 !sonarr/config/.gitkeep
+jellyfin/config/*
+!jellyfin/config/.gitkeep
+qbittorrent/config/*
+!qbittorrent/config/.gitkeep
 speedtest-tracker/config/*
 !speedtest-tracker/config/.gitkeep
 tailscale/tailscale/*

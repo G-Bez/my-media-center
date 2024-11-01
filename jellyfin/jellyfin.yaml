@@ -3,32 +3,34 @@ services:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
     environment:
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
+      - PUID=1000 #${USER_ID}
+      - PGID=1000 #${GROUP_ID}
       - TZ=${TZONE}
+      - VIRTUAL_HOST=${DUCKDNS_SUBDOMAIN}.duckdns.org
+      #- VIRTUAL_PORT=<<port>> #optional. Tell nginx which port to proxy if the container exposes multiple ports. Remember to also edit the corresponding nginx .conf files accordingly.
       #- JELLYFIN_PublishedServerUrl=192.168.0.5 #optional
     depends_on:
-      - dockerproxy
+      - swag
     networks:
-      - My_net
+      - Media_server_net
     ports:
       - ${JELLYFIN_HTTP_HOST_PORT}:${JELLYFIN_HTTP_CONTAINER_PORT}
-      #- ${JELLYFIN_HTTPS_HOST_PORT}:${JELLYFIN_HTTPS_CONTAINER_PORT} #optional https port
+      - ${JELLYFIN_HTTPS_HOST_PORT}:${JELLYFIN_HTTPS_CONTAINER_PORT} #optional https port
       #- ${JELLYFIN_UDP_HTTP_HOST_PORT}:${JELLYFIN_UDP_HTTP_CONTAINER_PORT}/udp #optional
       #- ${JELLYFIN_UDP_HTTPS_HOST_PORT}:${JELLYFIN_UDP_HTTPS_CONTAINER_PORT}/udp #optional
     volumes:
       - .\config:/config
+      - ..\swag\config\etc:/swag-ssl
       - ${MEDIA_DIR}:/data/media/
-      #- path\to\downloads:/downloads #optional
     restart: unless-stopped
     labels: 
       - homepage.group=Media
       - homepage.name=Jellyfin
       - homepage.icon=jellyfin.png
-      - homepage.href=http://${HOST}:${JELLYFIN_HTTP_HOST_PORT}
       - homepage.description=Media server
-      - homepage.ping=http://${HOST}:${JELLYFIN_HTTP_HOST_PORT}
       - homepage.showStats=false
+      - homepage.href=http://${HOST}:${JELLYFIN_HTTP_HOST_PORT}
+      - homepage.ping=http://${HOST}:${JELLYFIN_HTTP_HOST_PORT}
       - homepage.widget.type=jellyfin
       - homepage.widget.url=http://jellyfin:${JELLYFIN_HTTP_HOST_PORT}
       - homepage.widget.key=${JELLYFIN_API_KEY}

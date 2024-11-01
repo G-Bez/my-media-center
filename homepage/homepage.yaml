@@ -2,11 +2,14 @@ services:
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
-    user: ${HOMEPAGE_VAR_USER_ID}:${HOMEPAGE_VAR_GROUP_ID}
+    #user: ${HOMEPAGE_VAR_USER_ID}:${HOMEPAGE_VAR_GROUP_ID}
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
     depends_on:
-      - dockerproxy
+      - swag
     networks:
-      - My_net
+      - Media_server_net
     ports:
       - ${HOMEPAGE_HOST_PORT}:${HOMEPAGE_CONTAINER_PORT}
     volumes:

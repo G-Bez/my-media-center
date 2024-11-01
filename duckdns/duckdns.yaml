@@ -1,0 +1,23 @@
+services:
+  duckdns:
+    image: lscr.io/linuxserver/duckdns:latest
+    container_name: duckdns
+    environment:
+      #- PUID=${USER_ID} #optional. Comment out if running the container on read-only mode.
+      #- PGID=${GROUP_ID} #optional. Comment out if running the container on read-only mode.
+      - TZ=${TZONE} #optional
+      - SUBDOMAINS=${DUCKDNS_SUBDOMAIN}
+      - TOKEN=${DUCKDNS_TOKEN}
+      - LOG_FILE=true #optional
+      #- UPDATE_IP=ipv4 #optional (when set uses 3rd party cloudflare service)
+    depends_on: 
+      - socket-proxy
+    #network_mode: host #optional
+    networks:
+      - Media_server_net
+    volumes:
+      - .\config:/config #optional
+    restart: unless-stopped
+    read_only: true # optional but recommended.
+    tmpfs: # Mandatory if running the container on read-only mode.
+      - /run:exec 

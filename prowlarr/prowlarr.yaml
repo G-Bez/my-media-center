@@ -6,27 +6,28 @@ services:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
       - TZ=${TZONE}
+      - VIRTUAL_HOST=${DUCKDNS_SUBDOMAIN}.duckdns.org
+      #- VIRTUAL_PORT=<<port>> #optional. Tell nginx which port to proxy if the container exposes multiple ports. Remember to also edit the corresponding nginx .conf files accordingly.
     depends_on:
-      - lidarr
-      - radarr
-      - sonarr
+      - swag
     networks:
-      - My_net
+      - Media_server_net
     ports:
-      - ${PROWLARR_HOST_PORT}:${PROWLARR_CONTAINER_PORT}
+      #- ${PROWLARR_HTTP_HOST_PORT}:${PROWLARR_HTTP_CONTAINER_PORT} # Default HTTP port. In-app manual settings required to enable SSL. You can comment out this line after setting up SSL. 
+      - ${PROWLARR_HTTPS_HOST_PORT}:${PROWLARR_HTTPS_CONTAINER_PORT}
     volumes:
       - .\config:/config
+      - ..\swag\config\etc:/swag-ssl
       - ${MEDIA_DIR}:/data
-      #- path\to\downloads:/downloads #optional
     restart: unless-stopped
     labels: 
       - homepage.group=Torrent
       - homepage.name=Prowlarr
       - homepage.icon=prowlarr.png
-      - homepage.href=http://${HOST}:${PROWLARR_HOST_PORT}
       - homepage.description=Trackers management
-      - homepage.ping=http://${HOST}:${PROWLARR_HOST_PORT}
       - homepage.showStats=false
+      - homepage.href=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/prowlarr # Replace this value with http://localhost:${PROWLARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
+      - homepage.ping=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/prowlarr # Replace this value with http://localhost:${PROWLARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
       - homepage.widget.type=prowlarr
-      - homepage.widget.url=http://prowlarr:${PROWLARR_HOST_PORT}
+      - homepage.widget.url=https://prowlarr:${PROWLARR_HTTPS_HOST_PORT} # Replace this value with http://prowlarr:${PROWLARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
       - homepage.widget.key=${PROWLARR_API_KEY}

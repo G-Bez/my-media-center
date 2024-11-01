@@ -1,1 +1,0 @@
-here store your qbittorrent certificate and decryption key

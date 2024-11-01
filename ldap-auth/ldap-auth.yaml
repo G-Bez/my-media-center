@@ -1,0 +1,21 @@
+services:
+  ldap-auth:
+    image: lscr.io/linuxserver/ldap-auth:latest
+    container_name: ldap-auth
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TZONE}
+      - FERNETKEY= #optional
+      - CERTFILE= ..\swag\config\keys\cert.crt
+      - KEYFILE= ..\swag\config\keys\cert.key
+    depends_on: 
+      - duckdns
+    networks:
+      - Media_server_net
+    ports:
+      - ${LDAP_AUTH_DEAMON_HOST_PORT}:${LDAP_AUTH_DEAMON_CONTAINER_PORT}
+      - ${LDAP_LOGIN_PAGE_HOST_PORT}:${LDAP_LOGIN_PAGE_CONTAINER_PORT}
+    volumes:
+      - .\config:/config
+    restart: unless-stopped

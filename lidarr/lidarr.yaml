@@ -26,8 +26,8 @@ services:
       - homepage.icon=lidarr.png
       - homepage.description=Music management
       - homepage.showStats=false
-      - homepage.href=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/lidarr # Replace this value with http://localhost:${LIDARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
-      - homepage.ping=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/lidarr # Replace this value with http://localhost:${LIDARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL.
+      - homepage.href=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/lidarr # Replace this value with http://localhost:${LIDARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL. If using the awful workaround explained in swag.yaml file, replace the value with https://${DUCKDNS_SUBDOMAIN}.duckdns.org/lidarr
+      - homepage.ping=https://${DUCKDNS_SUBDOMAIN}.duckdns.org/lidarr # Replace this value with http://localhost:${LIDARR_HTTP_HOST_PORT} in order to test the widget before setting up SSL. If using the awful workaround explained in swag.yaml file, replace the value with https://${DUCKDNS_SUBDOMAIN}.duckdns.org/lidarr
       - homepage.widget.type=lidarr
       - homepage.widget.url=https://lidarr:${LIDARR_HTTPS_CONTAINER_PORT} # Replace this value with http://lidarr:${LIDARR_HTTP_CONTAINER_PORT} in order to test the widget before setting up SSL.
       - homepage.widget.key=${LIDARR_API_KEY}

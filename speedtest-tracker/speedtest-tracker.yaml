@@ -5,18 +5,20 @@ services:
     environment:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
-      - TZ=${TZONE}
+      - TZ=${TZONE} #optional
       - DB_CONNECTION=${SPEEDTEST_DB}
-      #- APP_KEY= #optional
+      - APP_KEY=${SPEEDTEST_TRACKER_APPKEY}
+      - SPEEDTEST_SCHEDULE=${SPEEDTEST_SCHEDULE} #optional (cron expression)
+      - PRUNE_RESULTS_OLDER_THAN=${SPEEDTEST_PRUNE} #optional (value in days)
       #- DB_HOST= #optional
       #- DB_PORT= #optional
       #- DB_DATABASE= #optional
       #- DB_USERNAME= #optional
       #- DB_PASSWORD= #optional
     depends_on:
-      - dockerproxy
+      - swag
     networks:
-      - My_net
+      - Media_server_net
     ports:
       - ${SPEEDTEST_HOST_PORT}:${SPEEDTEST_CONTAINER_PORT}
     volumes:

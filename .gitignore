@@ -8,6 +8,8 @@ ldap-auth/config/*
 !ldap-auth/config/.gitkeep
 swag/config/*
 !swag/config/.gitkeep
+heimdall/config/*
+!heimdall/config/.gitkeep
 homepage/config/logs
 prowlarr/config/*
 !prowlarr/config/.gitkeep
@@ -29,4 +31,9 @@ tailscale/tailscale/*
 # Homepage background img
 homepage/img/*
 !homepage/img/readme.txt
+
+# Heimdall images
+heimdall/img/*
+
+
 

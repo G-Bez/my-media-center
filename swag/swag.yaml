@@ -17,7 +17,7 @@ services:
       #- PROPAGATION= #optional
       #- EMAIL= #optional
       - ONLY_SUBDOMAINS=false #optional
-      #- EXTRA_DOMAINS= #optional
+      #- EXTRA_DOMAINS= #optional (extra domains are ignored when using duckdns validation, the resulting certificate will only cover the main domain. Setting the reverse proxy correctly for each servarr container at the same time is impossible with duckdns validation. Awful workaround needed in their corresponding nginx .conf files (ie setting $upstream_app to ${DUCKDNS_SUBDOMAIN}.duckdns.org and $upstream_port to ${<<APPNAME>>_HTTPS_CONTAINER_PORT}}) forcing you to forward each container port in router settings rather than only the reverse proxy one. Just buy a cheap domain, or proxy Jellyfin in order to be able to stream your media library to non local networks, and only manage your servarr apps and admin tools locally.)
       - STAGING=false #optional
     depends_on: 
       #- ldap-auth
@@ -25,7 +25,7 @@ services:
     volumes:
       - .\config:/config
     ports:
-      - ${SWAG_HTTP_HOST_PORT}:${SWAG_HTTP_CONTAINER_PORT} #optional
+      - ${SWAG_HTTP_HOST_PORT}:${SWAG_HTTP_CONTAINER_PORT} #optional http port
       - ${SWAG_HTTPS_HOST_PORT}:${SWAG_HTTPS_CONTAINER_PORT}
       - ${SWAG_DASHBOARD_HOST_PORT}:${SWAG_DASHBOARD_CONTAINER_PORT}
     networks:
@@ -35,10 +35,10 @@ services:
       - homepage.group=Network
       - homepage.name=Swag
       - homepage.icon=lets-encrypt.png
-      - homepage.href=http://${HOST}:${SWAG_DASHBOARD_HOST_PORT}
+      - homepage.href=http://${HOST}:${SWAG_HTTP_CONTAINER_PORT}
       - homepage.description=Reverse proxy and certbot client
-      - homepage.ping=http://${HOST}:${SWAG_DASHBOARD_HOST_PORT}
+      - homepage.ping=http://${HOST}:${SWAG_HTTP_CONTAINER_PORT}
       #- homepage.showStats=false
       - homepage.widget.type=swagdashboard
-      - homepage.widget.url=http://swagdashboard:${SWAG_DASHBOARD_HOST_PORT}
+      - homepage.widget.url=https://dashboard.${HOST}:${SWAG_DASHBOARD_CONTAINER_PORT}
       #- homepage.widget.key=${SWAG_API_KEY}

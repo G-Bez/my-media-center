@@ -3,11 +3,11 @@ services:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
     environment:
-      - PUID=1000 #${USER_ID}
-      - PGID=1000 #${GROUP_ID}
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
       - TZ=${TZONE}
       - VIRTUAL_HOST=${DUCKDNS_SUBDOMAIN}.duckdns.org
-      #- VIRTUAL_PORT=<<port>> #optional. Tell nginx which port to proxy if the container exposes multiple ports. Remember to also edit the corresponding nginx .conf files accordingly.
+      #- VIRTUAL_PORT=${JELLYFIN_HTTPS_HOST_PORT} #optional. Tell nginx which port to proxy if the container exposes multiple ports. Remember to also edit the corresponding nginx .conf files accordingly.
       #- JELLYFIN_PublishedServerUrl=192.168.0.5 #optional
     depends_on:
       - swag

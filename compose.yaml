@@ -1,17 +1,18 @@
 include:
   - socket-proxy/socket-proxy.yaml
   - duckdns/duckdns.yaml
-  - swag/swag.yaml
   #- ldap-auth/ldap-auth.yaml
+  - swag/swag.yaml
+  - speedtest-tracker/speedtest-tracker.yaml
   #- tailscale/tailscale.yaml
   - homepage/homepage.yaml
+  - heimdall/heimdall.yaml
   - lidarr/lidarr.yaml
   - prowlarr/prowlarr.yaml
   #- qbittorrent/qbittorrent.yaml
   - radarr/radarr.yaml
   - sonarr/sonarr.yaml
   - jellyfin/jellyfin.yaml
-  #- speedtest-tracker/speedtest-tracker.yaml
 
 networks:
   Media_server_net:

@@ -29,9 +29,9 @@ services:
       - homepage.group=Network
       - homepage.name=Speedtest tracker
       - homepage.icon=si-speedtest
-      - homepage.href=http://${HOST}:${SPEEDTEST_HOST_PORT}
+      - homepage.href=http://${HOST}:${SPEEDTEST_CONTAINER_PORT}
       - homepage.description=Speedtest monitor
-      - homepage.ping=http://${HOST}:${SPEEDTEST_HOST_PORT}
+      - homepage.ping=http://${HOST}:${SPEEDTEST_CONTAINER_PORT}
       - homepage.showStats=false
       - homepage.widget.type=speedtest
-      - homepage.widget.url=http://speedtest-tracker:${SPEEDTEST_HOST_PORT}
+      - homepage.widget.url=http://speedtest-tracker:${SPEEDTEST_CONTAINER_PORT}

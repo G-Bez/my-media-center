@@ -7,19 +7,22 @@ services:
       - PGID=${GROUP_ID}
       - TZ=${TZONE}
       - WEBUI_PORT=${QBIT_UI_CONTAINER_PORT}
-      - TORRENTING_PORT=${QBIT_TORRENTING_CONTAINER_PORT} #46558 attualmente aperta
+      - TORRENTING_PORT=${QBIT_TORRENTING_CONTAINER_PORT}
     depends_on:
-      - prowlarr
+      - lidarr
+      - radarr
+      - sonarr
     networks:
-      - My_net
+      - Media_server_net
     ports:
       - ${QBIT_UI_HOST_PORT}:${QBIT_UI_CONTAINER_PORT}
       - ${QBIT_TORRENTING_HOST_PORT}:${QBIT_TORRENTING_CONTAINER_PORT}
       - ${QBIT_TORRENTING_HOST_PORT}:${QBIT_TORRENTING_CONTAINER_PORT}/udp
     volumes:
       - .\config:/config
-      - .\ssl:/certs
-      - ${TORRENTS_DIR}:/data/torrents/
+      - ..\swag\config\etc:/swag-ssl
+      - ..\swag\config\keys:/swag-ssl-2
+      - ${DOWNLOAD_DIR}:/data/torrents/
     restart: unless-stopped
     labels: 
       - homepage.group=Torrent

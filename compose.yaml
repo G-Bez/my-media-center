@@ -9,7 +9,7 @@ include:
   - heimdall/heimdall.yaml
   - lidarr/lidarr.yaml
   - prowlarr/prowlarr.yaml
-  #- qbittorrent/qbittorrent.yaml
+  - qbittorrent/qbittorrent.yaml
   - radarr/radarr.yaml
   - sonarr/sonarr.yaml
   - jellyfin/jellyfin.yaml
